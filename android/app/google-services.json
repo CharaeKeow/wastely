@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "299116186636",
+    "project_id": "wastely-7a526",
+    "storage_bucket": "wastely-7a526.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299116186636:android:1c22e9d0dba903b4d6b229",
+        "android_client_info": {
+          "package_name": "com.wastely"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "299116186636-geqfp1f3slm7icr63bc12ospgb0adunu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wastely",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "299116186636-kk7rkms83jkhi0pgesh69s9k4opbvgcb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCe5L0266j60WyDMlV4dZ259r_-N5vptWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "299116186636-kk7rkms83jkhi0pgesh69s9k4opbvgcb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
