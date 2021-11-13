@@ -1,0 +1,56 @@
+{
+  "items": [
+    {
+      "id": "1",
+      "image": "../../assets/food-pics/food_banana.jpg",
+      "title": "Banana 🍌",
+      "category": "Food",
+      "quantity": 15,
+      "donorID": "1001",
+      "dateCreated": "3 days ago",
+      "donorName": "Charae",
+      "pickupTime": "Anytime",
+      "description": "Excess ripe banana. My mom posted this but it's too much so wanna donate it. Still good for around 4-5 days I think.",
+      "latLong": "6.160783, 102.179397"
+    },
+    {
+      "id": "2",
+      "image": "../../assets/food-pics/food_brussels_sprouts.jpg",
+      "title": "Brussels",
+      "category": "Food",
+      "quantity": 1,
+      "donorID": "1001",
+      "dateCreated": "1 days ago",
+      "donorName": "Charae",
+      "pickupTime": "Anytime",
+      "description": "My husband bought this but I am alergic so wanna give it away",
+      "latLong": "6.160783, 102.179397"
+    },
+    {
+      "id": "3",
+      "image": "../../assets/food-pics/food_burger.jpg",
+      "title": "Burger 🍔",
+      "category": "Food",
+      "quantity": 8,
+      "donorID": "1005",
+      "dateCreated": "1 hour ago",
+      "donorName": "Amin",
+      "pickupTime": "8-10 am",
+      "description": "My boss gave me this but it's too much plus I am dieting. Still good. It's meat btw",
+      "latLong": "6.1614486, 102.1792397"
+    },
+    {
+      "id": "4",
+      "image": "../../assets/food-pics/food_friedrice.jpg",
+      "title": "Fried Rice 🍚",
+      "category": "Food",
+      "quantity": 5,
+      "donorID": "1099",
+      "dateCreated": "20 minutes ago",
+      "donorName": "Hup Yup Tan",
+      "pickupTime": "8-11 am",
+      "description": "Prepared this for my guest but they cancelled their visit. Hit me up if you want. I packed them in nice polysterene plate.",
+      "latLong": "6.1627683,102.1794916"
+    }
+  ]
+}

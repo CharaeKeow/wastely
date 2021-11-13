@@ -1,32 +1,13 @@
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import * as React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons'
 
-import Profile from './Profile';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
-function ExploreScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Explore!</Text>
-    </View>
-  );
-}
+import HomeScreen from './HomeScreen';
+import ExploreScreen from './ExploreScreen'
 
 const Tab = createBottomTabNavigator()
-const Stack = createNativeStackNavigator()
 
-function BottomTab({ navigation }) {
+export default function BottomTab({ navigation }) {
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -57,15 +38,4 @@ function BottomTab({ navigation }) {
         }} />
     </Tab.Navigator>
   )
-}
-
-export default function Home({ navigation }) {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="BottomTab" component={BottomTab} />
-        <Stack.Screen name="Profile" component={Profile} options={{ headerShown: true }} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
 }

@@ -5,7 +5,7 @@ import auth from '@react-native-firebase/auth'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import Home from "./src/screens/Home"
+import AppStack from "./src/screens/AppStack"
 import Login from "./src/screens/Login"
 import Registration from './src/screens/Registration'
 
@@ -40,7 +40,7 @@ export default function App() {
 
   return (
     <>
-      <Home />
+      <AppStack />
     </>
   );
 }
