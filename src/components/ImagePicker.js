@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import {
-  Button,
+  Pressable,
   Image,
   Platform,
   StyleSheet,
+  Text,
   View,
 } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
+import { Button } from 'react-native-paper'
 
 export default function ImagePickerComponent() {
   const [image, setImage] = useState(null)
@@ -40,7 +42,10 @@ export default function ImagePickerComponent() {
 
   return (
     <View>
-      <Button title="Add Image" onPress={pickImage} />
+
+      <Button mode="contained" onPress={pickImage} style={styles.addImageBtn}>
+        Add Item
+      </Button>
       {image && <Image source={{ uri: image }} style={styles.img} />}
     </View>
   )
@@ -54,5 +59,20 @@ const styles = StyleSheet.create({
   }, img: {
     width: 300,
     height: 300,
+  }, addImageBtn: {
+    //width: 150,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: 20,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    elevation: 3,
+    backgroundColor: '#003D66'
+  }, btnText: {
+    fontSize: 16,
+    color: 'white',
+    fontWeight: 'bold'
   }
 })
