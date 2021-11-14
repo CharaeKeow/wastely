@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import BottomTab from './BottomTab'
 import Profile from './Profile'
+import AddItem from "./AddItem"
+import DetailScreen from './DetailScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -13,6 +15,8 @@ export default function Home({ navigation }) {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="BottomTab" component={BottomTab} />
         <Stack.Screen name="Profile" component={Profile} options={{ headerShown: true }} />
+        <Stack.Screen name="AddItem" component={AddItem} options={{ headerShown: true }} />
+        <Stack.Screen name="DetailScreen" component={DetailScreen} options={{ headerShown: true }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

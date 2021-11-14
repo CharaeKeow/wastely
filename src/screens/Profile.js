@@ -5,16 +5,24 @@ import {
   Text
 } from 'react-native'
 import auth from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore'
 
 export default function Profile({ navigation }) {
   const [user, setUser] = useState()
 
-  useEffect(() => {
+  useEffect(async () => {
     let isMounted = true;
 
     if (isMounted) {
-      let user = auth().currentUser
-      setUser(user)
+      await firestore()
+        .collection('Users')
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(documentSnapshot => {
+            setUser(documentSnapshot.data())
+            console.log(documentSnapshot.data())
+          })
+        })
     }
 
     return () => isMounted = false
@@ -35,6 +43,7 @@ export default function Profile({ navigation }) {
 
   return (
     <View>
+      <Text>{user.name}</Text>
       <Text>{user.email}</Text>
       <Button
         title="Sign Out"

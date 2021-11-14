@@ -6,11 +6,12 @@ import {
   Text,
   View,
 } from 'react-native'
+import { FAB } from 'react-native-paper'
 
 import styles from '../styles/HomeScreen.style'
 import Item from '../components/Item';
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const [data, setData] = useState()
   useEffect(() => {
     let arr = []
@@ -30,7 +31,7 @@ export default function HomeScreen() {
   }, [])
 
   const renderItem = ({ item }) => {
-    return <Item item={item} />
+    return <Item item={item} navigation={navigation} />
   }
 
   return (
@@ -39,6 +40,12 @@ export default function HomeScreen() {
         data={data}
         renderItem={renderItem}
         keyExtractor={item => item.id}
+      />
+      <FAB
+        style={styles.fab}
+        big
+        icon="plus"
+        onPress={() => navigation.navigate('AddItem')}
       />
     </View>
   );

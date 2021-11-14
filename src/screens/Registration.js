@@ -2,9 +2,9 @@ import React from 'react';
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import auth from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore'
 
 import styles from '../styles/Registration.style';
-
 
 export default function Registration({ navigation }) {
   const [fullName, setFullName] = React.useState('');
@@ -22,7 +22,15 @@ export default function Registration({ navigation }) {
     } else {
       auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(() => {
+        .then((userCredential) => {
+          firestore()
+            .collection('Users')
+            .doc(userCredential.uid)
+            .set({
+              name: fullName,
+              email: email,
+            }).catch(error => console.error(error))
+          console.log(userCredential)
           console.log('User account created and signed in!')
         })
         .catch(error => {
