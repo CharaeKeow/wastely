@@ -33,8 +33,6 @@ export default function ImagePickerComponent() {
       quality: 1,
     })
 
-    console.log(result)
-
     if (!result.cancelled) {
       setImage(result.uri)
     }
@@ -42,7 +40,6 @@ export default function ImagePickerComponent() {
 
   return (
     <View>
-
       <Button mode="contained" onPress={pickImage} style={styles.addImageBtn}>
         Add Item
       </Button>
