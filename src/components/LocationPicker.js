@@ -8,10 +8,10 @@ import {
 import * as Location from 'expo-location'
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps'
 
-export default function LocationPicker() {
+export default function LocationPicker({ latitude, longitude, setLatitude, setLongitude }) {
   const [location, setLocation] = useState(null)
-  const [latitude, setLatitude] = useState(null)
-  const [longitude, setLongitude] = useState(null)
+  //const [latitude, setLatitude] = useState(null)
+  //const [longitude, setLongitude] = useState(null)
   const [errorMsg, setErrorMsg] = useState(null)
   const [region, setRegion] = useState(null)
 
