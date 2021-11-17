@@ -9,9 +9,12 @@ import {
 } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 import { Button } from 'react-native-paper'
+import auth from '@react-native-firebase/auth'
+import storage from '@react-native-firebase/storage'
 
-export default function ImagePickerComponent() {
+export default function ImagePickerComponent({ setImageURL }) {
   const [image, setImage] = useState(null)
+  const [uid, setUid] = useState()
 
   useEffect(() => {
     (async () => {
@@ -25,16 +28,30 @@ export default function ImagePickerComponent() {
     })()
   }, [])
 
+  useEffect(() => {
+    let userId = auth().currentUser.uid
+    setUid(userId)
+  }, [])
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
+      allowsEditing: false,
       aspect: [4, 3],
       quality: 1,
     })
 
     if (!result.cancelled) {
       setImage(result.uri)
+    }
+
+    //firebase storage bucket reference
+    const reference = storage().ref(result.uri)
+    //upload file
+    await reference.putFile(result.uri)
+    const url = await storage().ref(result.uri).getDownloadURL()
+    if (url) {
+      setImageURL(url)
     }
   }
 
