@@ -36,7 +36,7 @@ export default function LocationPicker() {
     text = errorMsg
   } else if (location) {
     //text = JSON.stringify(location)
-    console.log(`${latitude} ${longitude}`)
+    //console.log(`${latitude} ${longitude}`)
   }
 
   if (!longitude && !latitude) {
@@ -59,15 +59,14 @@ export default function LocationPicker() {
 
   return (
     <View style={styles.container}>
-      <Text>{latitude} {longitude}</Text>
       <MapView
         provider={PROVIDER_GOOGLE}
         style={styles.map}
         initialRegion={{
           latitude: latitude,
           longitude: longitude,
-          latitudeDelta: 0.0250,
-          longitudeDelta: 0.0250,
+          latitudeDelta: 0.0200,
+          longitudeDelta: 0.0200,
         }}
       >
         <Marker coordinate={{ latitude: latitude, longitude: longitude }} />
@@ -79,11 +78,11 @@ export default function LocationPicker() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 400,
+    height: 150,
     width: 400,
   },
   map: {
     width: Dimensions.get('window').width,
-    height: 400,
+    height: 150,
   }
 })
