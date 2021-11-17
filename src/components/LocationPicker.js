@@ -10,10 +10,9 @@ import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps'
 
 export default function LocationPicker({ latitude, longitude, setLatitude, setLongitude }) {
   const [location, setLocation] = useState(null)
-  //const [latitude, setLatitude] = useState(null)
-  //const [longitude, setLongitude] = useState(null)
   const [errorMsg, setErrorMsg] = useState(null)
-  const [region, setRegion] = useState(null)
+  //const [region, setRegion] = useState(null)
+  const [coordinate, setCoordinate] = useState(null)
 
   useEffect(() => {
     (async () => {
@@ -29,6 +28,13 @@ export default function LocationPicker({ latitude, longitude, setLatitude, setLo
       setLongitude(location.coords.longitude)
     })()
   }, [])
+
+  useEffect(() => {
+    if (coordinate) {
+      setLatitude(coordinate.latitude)
+      setLongitude(coordinate.longitude)
+    }
+  }, [coordinate])
 
   let text = 'Waiting...'
 
@@ -69,7 +75,12 @@ export default function LocationPicker({ latitude, longitude, setLatitude, setLo
           longitudeDelta: 0.0200,
         }}
       >
-        <Marker coordinate={{ latitude: latitude, longitude: longitude }} />
+        <Marker draggable
+          coordinate={{ latitude: latitude, longitude: longitude }}
+          onDragEnd={async (e) => {
+            setCoordinate(e.nativeEvent.coordinate)
+          }}
+        />
       </MapView>
     </View>
   )
