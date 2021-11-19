@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Dimensions,
 } from 'react-native'
 import { FAB } from 'react-native-paper'
 import auth from '@react-native-firebase/auth'
@@ -47,58 +48,67 @@ export default function HomeScreen({ navigation }) {
   }
 
   useEffect(() => {
-    return ref.onSnapshot((querySnapshot) => {
-      const list = []
+    let isMounted = true
 
-      querySnapshot.forEach(doc => {
+    if (isMounted) {
+      return ref.onSnapshot((querySnapshot) => {
+        const list = []
 
-        //assign data from document
-        const {
-          category,
-          description,
-          donorName,
-          duration,
-          title,
-          imageURL,
-          isClaimed,
-          isPickedUp,
-          latitude,
-          longitude,
-          pickUpTime,
-          quantity,
-          timeStamp,
-          uid,
-        } = doc.data()
+        querySnapshot.forEach(doc => {
 
-        let distance = calculateLocation(latitude, longitude)
+          //assign data from document
+          const {
+            category,
+            description,
+            donorName,
+            duration,
+            title,
+            imageURL,
+            isClaimed,
+            isPickedUp,
+            latitude,
+            longitude,
+            pickUpTime,
+            quantity,
+            timeStamp,
+            uid,
+          } = doc.data()
 
-        //push data to temp array list
-        list.push({
-          id: doc.id,
-          category,
-          description,
-          donorName,
-          duration,
-          title,
-          imageURL,
-          isClaimed,
-          isPickedUp,
-          latitude,
-          longitude,
-          pickUpTime,
-          quantity,
-          timeStamp,
-          uid,
-          distance: distance,
+          let distance = calculateLocation(latitude, longitude)
+
+          //push data to temp array list
+          if (!isClaimed) {
+            list.push({
+              id: doc.id,
+              category,
+              description,
+              donorName,
+              duration,
+              title,
+              imageURL,
+              isClaimed,
+              isPickedUp,
+              latitude,
+              longitude,
+              pickUpTime,
+              quantity,
+              timeStamp,
+              uid,
+              distance: distance,
+            })
+          }
+
+          setDonations(list)
+
+          if (loading) {
+            setLoading(false)
+          }
         })
+      }, [])
+    }
 
-        setDonations(list)
+    return () => { isMounted = false }
 
-        if (loading) {
-          setLoading(false)
-        }
-      })
-    }, [])
   }, [])
 
   const renderItem = ({ item }) => {
@@ -117,9 +127,16 @@ export default function HomeScreen({ navigation }) {
     }
 
     return haversine(start, end)
+
   }
 
   if (loading) {
+    return (
+      <ActivityIndicator animating={true} color={Colors.red800} />
+    )
+  }
+
+  if (!location.coords.latitude && !location.coords.longitude) {
     return (
       <ActivityIndicator animating={true} color={Colors.red800} />
     )
@@ -139,5 +156,6 @@ export default function HomeScreen({ navigation }) {
         onPress={() => navigation.navigate('AddItem')}
       />
     </View>
+
   );
 }

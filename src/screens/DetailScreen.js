@@ -9,9 +9,12 @@ import {
 import { Button } from 'react-native-paper'
 import MapView, { Circle, PROVIDER_GOOGLE } from 'react-native-maps'
 import { ScrollView } from 'react-native-gesture-handler'
+import firestore from '@react-native-firebase/firestore'
+import auth from '@react-native-firebase/auth'
 
 export default function DetailScreen({ route }) {
   const { obj } = route.params
+  const [requesterID, setRequesterID] = useState()
 
   const {
     id,
@@ -37,8 +40,22 @@ export default function DetailScreen({ route }) {
     return date.toDateString()
   }
 
-  const handleRequest = () => {
+  useEffect(() => {
+    (async () => {
+      let userId = auth().currentUser.uid
+      setRequesterID(userId)
+    })()
+  }, [requesterID])
 
+  const handleRequest = async () => {
+    if (requesterID) {
+      await firestore()
+        .collection('Donations')
+        .doc(id)
+        .update({
+          isClaimed: requesterID
+        }).catch(error => console.error(error))
+    }
   }
 
   return (
