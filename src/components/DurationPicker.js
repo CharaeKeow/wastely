@@ -3,8 +3,8 @@
  */
 
 import React, { useState, useRef } from 'react'
-import { Picker } from '@react-native-picker/picker'
-import DropDownPicker from 'react-native-dropdown-picker';
+import { Dimensions, StyleSheet } from 'react-native'
+import DropDownPicker from 'react-native-dropdown-picker'
 
 export default function DurationPicker({ setDuration }) {
   const [open, setOpen] = useState(false);
@@ -52,6 +52,7 @@ export default function DurationPicker({ setDuration }) {
 
   return (
     <DropDownPicker
+      placeholder="List for"
       open={open}
       value={selected}
       items={items}
@@ -72,6 +73,14 @@ export default function DurationPicker({ setDuration }) {
         initialNumToRender: 10
       }}
       modalTitle="Select Duration"
+      style={styles.dropdown}
     />
   )
 }
+
+const styles = StyleSheet.create({
+  dropdown: {
+    width: Dimensions.get('window').width - 20,
+    alignSelf: 'center',
+  }
+})

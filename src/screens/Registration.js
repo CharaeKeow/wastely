@@ -23,9 +23,10 @@ export default function Registration({ navigation }) {
       auth()
         .createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
+          console.log(userCredential.user.uid)
           firestore()
             .collection('Users')
-            .doc(userCredential.uid)
+            .doc(userCredential.user.uid)
             .set({
               name: fullName,
               email: email,

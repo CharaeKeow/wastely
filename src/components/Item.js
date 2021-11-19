@@ -19,10 +19,14 @@ export default function Item({ item, navigation }) {
       style={styles.item}
       onPress={() => navigation.navigate('DetailScreen', { obj: item })}
     >
-      <Text>{item.title}</Text>
-      <Text>{item.quantity}</Text>
-      <Text>{item.donorName}</Text>
-      <Image style={styles.img} source={require('../../assets/food-pics/food_banana.jpg')} />
+      <View>
+        <Image style={styles.img} source={{ uri: item.imageURL }} />
+      </View>
+      <View style={styles.ctnDetails}>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text>{item.donorName}</Text>
+        <Text>{item.distance.toFixed(2)} km</Text>
+      </View>
     </TouchableOpacity>
   )
 }
@@ -37,10 +41,17 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     padding: 10,
     flex: 1,
+    flexDirection: 'row',
     width: 300,
     alignSelf: 'center',
     backgroundColor: '#fff',
     borderRadius: 15,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: '800',
+  },
+  ctnDetails: {
+    padding: 5,
   }
-
 })

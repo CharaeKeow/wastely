@@ -83,7 +83,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 5,
     elevation: 3,
-    backgroundColor: '#003D66'
+    backgroundColor: '#016FB9',
+    marginBottom: 20,
   }, btnText: {
     fontSize: 16,
     color: 'white',
