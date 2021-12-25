@@ -8,7 +8,6 @@ import {
   Dimensions,
 } from 'react-native'
 import { FAB } from 'react-native-paper'
-import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 import { ActivityIndicator, Colors } from 'react-native-paper'
 const haversine = require('haversine')
