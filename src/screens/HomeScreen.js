@@ -16,7 +16,9 @@ import * as Location from 'expo-location'
 import styles from '../styles/HomeScreen.style'
 import Item from '../components/Item'
 
+
 export default function HomeScreen({ navigation }) {
+  const [selected, setSelected] = useState('all')
   const [filter, setFilter] = useState();
   const [donation, setDonation] = useState()
   const [donations, setDonations] = useState([])
@@ -145,7 +147,38 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View>
+      <View style={styles.chipsContainer}>
+        <Chip
+          selected={selected == 'all' ? true : false}
+          selectedColor={selected == 'all' ? '#016FB9' : '#000'}
+          style={styles.chip}
+          icon="filter"
+          onPress={() => setSelected('all')
+          }>All</Chip>
+        <Chip
+          selected={selected == 'food' ? true : false}
+          selectedColor={selected == 'food' ? '#016FB9' : '#000'}
+          style={styles.chip}
+          icon="food"
+          onPress={() => setSelected('food')
+          }>Food</Chip>
+        <Chip
+          selected={selected == 'non-food' ? true : false}
+          selectedColor={selected == 'non-food' ? '#016FB9' : '#000'}
+          style={styles.chip}
+          icon="heart"
+          onPress={() => setSelected('non-food')
+          }>Non-food</Chip>
+        <Chip
+          selected={selected == 'flag' ? true : false}
+          selectedColor={selected == 'flag' ? '#016FB9' : '#000'}
+          style={styles.chip}
+          icon="flag"
+          onPress={() => setSelected('flag')
+          }>Emergency</Chip>
+      </View>
       <FlatList
+        style={styles.flatListContainer}
         data={donations}
         renderItem={renderItem}
         keyExtractor={item => item.id}
@@ -157,6 +190,5 @@ export default function HomeScreen({ navigation }) {
         onPress={() => navigation.navigate('AddItem')}
       />
     </View>
-
   );
 }
