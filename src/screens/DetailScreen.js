@@ -69,6 +69,8 @@ export default function DetailScreen({ route }) {
         <Text style={styles.txt}>Description: {description}</Text>
         <Text style={styles.txt}>Pickup Time: {pickUpTime}</Text>
         <Text style={styles.txt}>Approximate Location</Text>
+
+        {/*//TODO: Remove the MapView comment to enable MapView again
         <MapView
           provider={PROVIDER_GOOGLE}
           style={styles.map}
@@ -87,6 +89,8 @@ export default function DetailScreen({ route }) {
             fillColor="rgba(1, 111, 185, 0.3)"
           />
         </MapView>
+        */}
+
       </View>
       <Button
         mode="contained"

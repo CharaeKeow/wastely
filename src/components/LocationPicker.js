@@ -65,6 +65,7 @@ export default function LocationPicker({ latitude, longitude, setLatitude, setLo
 
   return (
     <View style={styles.container}>
+      {/*
       <MapView
         provider={PROVIDER_GOOGLE}
         style={styles.map}
@@ -82,6 +83,7 @@ export default function LocationPicker({ latitude, longitude, setLatitude, setLo
           }}
         />
       </MapView>
+      */}
     </View>
   )
 }

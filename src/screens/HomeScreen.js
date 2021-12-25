@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { FAB } from 'react-native-paper'
 import firestore from '@react-native-firebase/firestore'
-import { ActivityIndicator, Colors } from 'react-native-paper'
+import { ActivityIndicator, Chip, Colors } from 'react-native-paper'
 const haversine = require('haversine')
 import * as Location from 'expo-location'
 
@@ -17,6 +17,7 @@ import styles from '../styles/HomeScreen.style'
 import Item from '../components/Item'
 
 export default function HomeScreen({ navigation }) {
+  const [filter, setFilter] = useState();
   const [donation, setDonation] = useState()
   const [donations, setDonations] = useState([])
   const [loading, setLoading] = useState(true)
@@ -25,6 +26,7 @@ export default function HomeScreen({ navigation }) {
   const [location, setLocation] = useState(null)
   const [errorMsg, setErrorMsg] = useState(null)
 
+  // Firestore 'Donations' document reference
   const ref = firestore().collection('Donations')
 
   useEffect(() => {
