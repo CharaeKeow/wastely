@@ -58,7 +58,6 @@ export default function HomeScreen({ navigation }) {
         const list = []
 
         querySnapshot.forEach(doc => {
-
           //assign data from document
           const {
             category,
