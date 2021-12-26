@@ -32,6 +32,7 @@ export default function HomeScreen({ navigation }) {
   const ref = firestore().collection('Donations')
 
   useEffect(() => {
+
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync()
       if (status !== 'granted') {
@@ -43,6 +44,8 @@ export default function HomeScreen({ navigation }) {
       setLocation(location)
       console.log(location)
     })()
+
+
   }, [])
 
   //if error alert user that need their location
@@ -122,14 +125,11 @@ export default function HomeScreen({ navigation }) {
       latitude: location.coords.latitude,
       longitude: location.coords.longitude
     }
-
     const end = {
       latitude: itemLat,
       longitude: itemLong,
     }
-
     return haversine(start, end)
-
   }
 
   if (loading) {

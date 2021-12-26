@@ -5,9 +5,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native'
-import firestore from '@react-native-firebase/firestore'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { NavigationContainer } from '@react-navigation/native'
 
 export default function Item({ item, navigation }) {
   useEffect(() => {
