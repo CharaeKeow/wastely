@@ -32,7 +32,6 @@ export default function HomeScreen({ navigation }) {
   const ref = firestore().collection('Donations')
 
   useEffect(() => {
-
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync()
       if (status !== 'granted') {
@@ -42,11 +41,8 @@ export default function HomeScreen({ navigation }) {
 
       let location = await Location.getCurrentPositionAsync({})
       setLocation(location)
-      console.log(location)
     })()
-
-
-  }, [])
+  })
 
   //if error alert user that need their location
   if (errorMsg) {
@@ -56,7 +52,7 @@ export default function HomeScreen({ navigation }) {
   useEffect(() => {
     let isMounted = true
 
-    if (isMounted) {
+    if (isMounted && location) {
       return ref.onSnapshot((querySnapshot) => {
         const list = []
 
@@ -111,9 +107,7 @@ export default function HomeScreen({ navigation }) {
         })
       }, [])
     }
-
     return () => { isMounted = false }
-
   }, [])
 
   const renderItem = ({ item }) => {

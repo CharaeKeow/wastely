@@ -6,6 +6,7 @@ import BottomTab from './BottomTab'
 import Profile from './Profile'
 import AddItem from "./AddItem"
 import DetailScreen from './DetailScreen'
+import MyListingDetailScreen from './MyListingDetailScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -17,6 +18,7 @@ export default function Home({ navigation }) {
         <Stack.Screen name="Profile" component={Profile} options={{ headerShown: true }} />
         <Stack.Screen name="AddItem" component={AddItem} options={{ headerShown: true }} />
         <Stack.Screen name="DetailScreen" component={DetailScreen} options={{ headerShown: true }} />
+        <Stack.Screen name="MyListingDetailScreen" component={MyListingDetailScreen} options={{ headerShown: true }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

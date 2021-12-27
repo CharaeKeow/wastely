@@ -41,7 +41,7 @@ export default function MyListing({ navigation }) {
   useEffect(() => {
     let isMounted = true
 
-    if (isMounted && userID) {
+    if (isMounted) {
       return ref.onSnapshot((querySnapshot) => {
         const list = []
 
@@ -86,11 +86,11 @@ export default function MyListing({ navigation }) {
           }
         })
         setDonations(list)
-      })
+      }, [])
     }
 
     return () => { isMounted = false }
-  }, [])
+  }, [donations])
 
   const renderItem = ({ item }) => {
     return <Listing item={item} navigation={navigation} />

@@ -12,6 +12,8 @@ import { ScrollView } from 'react-native-gesture-handler'
 import firestore from '@react-native-firebase/firestore'
 import auth from '@react-native-firebase/auth'
 
+import styles from '../styles/MyListingDetailScreen.style'
+
 export default function DetailScreen({ route }) {
   const { obj } = route.params
   const [requesterID, setRequesterID] = useState()
@@ -103,31 +105,3 @@ export default function DetailScreen({ route }) {
     </ScrollView>
   )
 }
-
-const styles = StyleSheet.create({
-  img: {
-    height: 300,
-    width: 400,
-  },
-  ctnDetails: {
-    padding: 5,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: '800',
-  },
-  map: {
-    width: Dimensions.get('window').width,
-    height: 250,
-    marginTop: 5,
-  },
-  txt: {
-    marginTop: 5,
-  },
-  btnRequest: {
-    width: 300,
-    alignSelf: 'center',
-    marginTop: 20,
-    marginBottom: 20,
-  },
-})

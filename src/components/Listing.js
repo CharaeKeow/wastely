@@ -13,7 +13,7 @@ export default function Listing({ item, navigation }) {
   return (
     <TouchableOpacity
       style={styles.item}
-      onPress={() => navigation.navigate('DetailScreen', { obj: item })}
+      onPress={() => navigation.navigate('MyListingDetailScreen', { obj: item })}
     >
       <View>
         <Image style={styles.img} source={{ uri: item.imageURL }} />
