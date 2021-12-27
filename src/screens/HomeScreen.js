@@ -11,11 +11,12 @@ import { FAB } from 'react-native-paper'
 import firestore from '@react-native-firebase/firestore'
 import { ActivityIndicator, Chip, Colors } from 'react-native-paper'
 const haversine = require('haversine')
-import * as Location from 'expo-location'
 
+import * as HookState from '@hookstate/core'
+
+import store from '../lib/store'
 import styles from '../styles/HomeScreen.style'
 import Item from '../components/Item'
-
 
 export default function HomeScreen({ navigation }) {
   const [selected, setSelected] = useState('all')
@@ -25,34 +26,45 @@ export default function HomeScreen({ navigation }) {
   const [loading, setLoading] = useState(true)
 
   //for getting user location
-  const [location, setLocation] = useState(null)
-  const [errorMsg, setErrorMsg] = useState(null)
+  //const [location, setLocation] = useState(null)
+  //const [errorMsg, setErrorMsg] = useState(null)
 
   // Firestore 'Donations' document reference
   const ref = firestore().collection('Donations')
 
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync()
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied')
-        return
-      }
+  const { location, errorMsg } = HookState.useState(store)
 
-      let location = await Location.getCurrentPositionAsync({})
-      setLocation(location)
-    })()
+  /*
+  useEffect(() => {
+
+    let isMounted = true;
+
+    if (isMounted && loading) {
+      (async () => {
+        let { status } = await Location.requestForegroundPermissionsAsync()
+        if (status !== 'granted') {
+          setErrorMsg('Permission to access location was denied')
+          return
+        }
+
+        let location = await Location.getCurrentPositionAsync({})
+        setLocation(location)
+      })()
+    }
+
+    return () => { isMounted = false }
   })
+  */
 
   //if error alert user that need their location
-  if (errorMsg) {
+  if (errorMsg.promised) {
     alert(errorMsg)
   }
 
   useEffect(() => {
     let isMounted = true
 
-    if (isMounted && location) {
+    if (isMounted) {
       return ref.onSnapshot((querySnapshot) => {
         const list = []
 
@@ -115,9 +127,12 @@ export default function HomeScreen({ navigation }) {
   }
 
   const calculateLocation = (itemLat, itemLong) => {
+
+    const loc = location.get()
+
     const start = {
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude
+      latitude: loc.coords.latitude,
+      longitude: loc.coords.longitude
     }
     const end = {
       latitude: itemLat,
@@ -132,11 +147,13 @@ export default function HomeScreen({ navigation }) {
     )
   }
 
+  /*
   if (!location.coords.latitude && !location.coords.longitude) {
     return (
       <ActivityIndicator animating={true} color={Colors.red800} />
     )
   }
+  */
 
   return (
     <View>

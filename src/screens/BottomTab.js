@@ -1,15 +1,18 @@
 import * as React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons'
+import * as Location from 'expo-location'
 
-import HomeScreen from './HomeScreen';
+import HomeScreen from './HomeScreen'
 import ExploreScreen from './ExploreScreen'
-import MyListing from './MyListing';
-import Chatbot from './Chatbot';
+import MyListing from './MyListing'
+import Chatbot from './Chatbot'
+import RequestScreen from './RequestScreen'
 
 const Tab = createBottomTabNavigator()
 
 export default function BottomTab({ navigation }) {
+
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -24,11 +27,21 @@ export default function BottomTab({ navigation }) {
               color="black"
               onPress={() => navigation.navigate('Profile')} />
           ),
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Donations',
           tabBarIcon: ({ color, size }) => (
-            <Entypo name="home" color={color} size={size} />
+            <Entypo name="shopping-basket" color={color} size={size} />
           ),
         })} />
+      <Tab.Screen
+        name="RequestScreen"
+        component={RequestScreen}
+        options={{
+          tabBarLabel: 'Request',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="flag" color={color} size={size} />
+          ),
+        }}
+      />
       <Tab.Screen
         name="Explore"
         component={ExploreScreen}

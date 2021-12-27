@@ -65,10 +65,11 @@ export default function LocationPicker({ latitude, longitude, setLatitude, setLo
 
   return (
     <View style={styles.container}>
-      {/*
+
       <MapView
         provider={PROVIDER_GOOGLE}
         style={styles.map}
+        zoomEnabled={true}
         initialRegion={{
           latitude: latitude,
           longitude: longitude,
@@ -83,7 +84,7 @@ export default function LocationPicker({ latitude, longitude, setLatitude, setLo
           }}
         />
       </MapView>
-      */}
+
     </View>
   )
 }
@@ -96,6 +97,6 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get('window').width,
-    height: 150,
+    height: 160,
   }
 })

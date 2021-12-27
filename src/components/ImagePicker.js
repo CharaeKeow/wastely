@@ -58,7 +58,7 @@ export default function ImagePickerComponent({ setImageURL }) {
   return (
     <View>
       <Button mode="contained" onPress={pickImage} style={styles.addImageBtn}>
-        Add Item
+        Add Image
       </Button>
       {image && <Image source={{ uri: image }} style={styles.img} />}
     </View>
