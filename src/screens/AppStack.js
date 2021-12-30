@@ -8,6 +8,7 @@ import AddItem from "./AddItem"
 import AddRequest from "./AddRequest"
 import DetailScreen from './DetailScreen'
 import MyListingDetailScreen from './MyListingDetailScreen'
+import RequestDetailScreen from './RequestDetailScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -21,6 +22,7 @@ export default function Home({ navigation }) {
         <Stack.Screen name="AddRequest" component={AddRequest} options={{ headerShown: true }} />
         <Stack.Screen name="DetailScreen" component={DetailScreen} options={{ headerShown: true }} />
         <Stack.Screen name="MyListingDetailScreen" component={MyListingDetailScreen} options={{ headerShown: true }} />
+        <Stack.Screen name="RequestDetailScreen" component={RequestDetailScreen} options={{ headerShown: true }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

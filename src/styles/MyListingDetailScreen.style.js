@@ -9,8 +9,8 @@ export default StyleSheet.create({
     padding: 5,
   },
   title: {
-    fontSize: 30,
-    fontWeight: '800',
+    fontSize: 20,
+    fontWeight: '900',
   },
   map: {
     width: Dimensions.get('window').width,

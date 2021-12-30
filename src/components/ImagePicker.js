@@ -71,8 +71,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   }, img: {
-    width: 300,
-    height: 300,
+    width: 200,
+    height: 200,
+    alignSelf: 'center'
   }, addImageBtn: {
     //width: 150,
     alignItems: 'center',
@@ -89,5 +90,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'white',
     fontWeight: 'bold'
+  }, emptyView: {
+    width: 300,
+    height: 300,
+    backgroundColor: '#fff',
   }
 })

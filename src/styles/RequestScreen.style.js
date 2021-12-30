@@ -10,7 +10,7 @@ export default StyleSheet.create({
   },
   fab: {
     position: 'absolute',
-    marginBottom: 40,
+    marginBottom: 100,
     marginRight: 10,
     right: 0,
     bottom: 0,
