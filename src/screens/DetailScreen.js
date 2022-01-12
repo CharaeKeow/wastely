@@ -102,6 +102,25 @@ export default function DetailScreen({ route }) {
       >
         Request this
       </Button>
+      <View>
+        <Text style={styles.helpText}>Contact 📞: </Text>
+        <View style={styles.btnHelpCtn}>
+          <Button
+            icon="whatsapp"
+            mode="contained"
+            style={styles.btnHelp}
+            onPress={() => Linking.openURL(`https://wasap.my/+6${phoneNo}`)}>
+            WhatsApp
+          </Button>
+          <Button
+            icon="phone"
+            mode="contained"
+            style={styles.btnHelp}
+            onPress={() => Linking.openURL(`tel:+6${obj.phoneNo}`)}>
+            Call
+          </Button>
+        </View>
+      </View>
     </ScrollView>
   )
 }
