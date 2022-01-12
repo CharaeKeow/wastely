@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {
-  Image,
   FlatList,
-  StyleSheet,
-  Text,
   View,
-  Dimensions,
 } from 'react-native'
 import { FAB } from 'react-native-paper'
 import firestore from '@react-native-firebase/firestore'
@@ -21,7 +17,6 @@ import Item from '../components/Item'
 export default function HomeScreen({ navigation }) {
   const [selected, setSelected] = useState('all')
   const [filter, setFilter] = useState();
-  const [donation, setDonation] = useState()
   const [donations, setDonations] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -33,28 +28,6 @@ export default function HomeScreen({ navigation }) {
   const ref = firestore().collection('Donations')
 
   const { location, errorMsg } = HookState.useState(store)
-
-  /*
-  useEffect(() => {
-
-    let isMounted = true;
-
-    if (isMounted && loading) {
-      (async () => {
-        let { status } = await Location.requestForegroundPermissionsAsync()
-        if (status !== 'granted') {
-          setErrorMsg('Permission to access location was denied')
-          return
-        }
-
-        let location = await Location.getCurrentPositionAsync({})
-        setLocation(location)
-      })()
-    }
-
-    return () => { isMounted = false }
-  })
-  */
 
   //if error alert user that need their location
   if (errorMsg.promised) {
@@ -147,14 +120,6 @@ export default function HomeScreen({ navigation }) {
     )
   }
 
-  /*
-  if (!location.coords.latitude && !location.coords.longitude) {
-    return (
-      <ActivityIndicator animating={true} color={Colors.red800} />
-    )
-  }
-  */
-
   return (
     <View>
       <View style={styles.chipsContainer}>
@@ -179,17 +144,10 @@ export default function HomeScreen({ navigation }) {
           icon="heart"
           onPress={() => setSelected('non-food')
           }>Non-food</Chip>
-        <Chip
-          selected={selected == 'flag' ? true : false}
-          selectedColor={selected == 'flag' ? '#016FB9' : '#000'}
-          style={styles.chip}
-          icon="flag"
-          onPress={() => setSelected('flag')
-          }>Emergency</Chip>
       </View>
       <FlatList
         style={styles.flatListContainer}
-        data={donations}
+        data={selected === 'all' ? donations : selected == 'food' ? donations.filter(donation => (donation.category == 'Food')) : donations.filter(donation => donation.category == 'Non-Food')}
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />

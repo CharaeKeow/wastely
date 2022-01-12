@@ -21,6 +21,7 @@ export default function RequestScreen({ navigation }) {
   const { location, errorMsg } = HookState.useState(store)
   const [requests, setRequests] = useState(null)
   const [loading, setLoading] = useState(null)
+  const [selected, setSelected] = useState('all')
 
   const ref = firestore().collection('Requests')
 
@@ -97,9 +98,39 @@ export default function RequestScreen({ navigation }) {
 
   return (
     <View>
+      <View style={styles.chipsContainer}>
+        <Chip
+          selected={selected == 'all' ? true : false}
+          selectedColor={selected == 'all' ? '#016FB9' : '#000'}
+          style={styles.chip}
+          icon="filter"
+          onPress={() => setSelected('all')
+          }>All</Chip>
+        <Chip
+          selected={selected == 'emergency' ? true : false}
+          selectedColor={selected == 'emergency' ? '#016FB9' : '#000'}
+          style={styles.chip}
+          icon="alert"
+          onPress={() => setSelected('emergency')
+          }>Emergency</Chip>
+        <Chip
+          selected={selected == 'volunteer' ? true : false}
+          selectedColor={selected == 'volunteer' ? '#016FB9' : '#000'}
+          style={styles.chip}
+          icon="handshake"
+          onPress={() => setSelected('volunteer')
+          }>Volunteer</Chip>
+        <Chip
+          selected={selected == 'other' ? true : false}
+          selectedColor={selected == 'other' ? '#016FB9' : '#000'}
+          style={styles.chip}
+          icon="food"
+          onPress={() => setSelected('other')
+          }>Other</Chip>
+      </View>
       <FlatList
         style={styles.flatListContainer}
-        data={requests}
+        data={selected === 'all' ? requests : selected == 'emergency' ? requests.filter(request => request.category == 'Emergency') : selected == 'volunteer' ? requests.filter(request => request.category == 'Volunteer') : requests.filter(request => request.category != 'Volunteer' && request.category != 'Emergency')}
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />

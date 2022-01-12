@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
@@ -10,10 +10,11 @@ export default StyleSheet.create({
   },
   fab: {
     position: 'absolute',
-    marginBottom: 100,
-    marginRight: 10,
-    right: 0,
-    bottom: 0,
+    resizeMode: 'contain',
+    //marginBottom: 100,
+    //marginRight: 10,
+    right: 10,
+    bottom: 50,
     backgroundColor: '#016FB9'
   },
   chipsContainer: {
@@ -36,6 +37,6 @@ export default StyleSheet.create({
   },
   flatListContainer: {
     marginTop: 20,
-    minHeight: 700,
+    minHeight: Dimensions.get('window').height - 110,
   }
 })
