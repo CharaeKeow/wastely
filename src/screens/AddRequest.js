@@ -68,6 +68,7 @@ export default function AddRequest() {
   }
 
   const handleSubmit = async () => {
+
     if (category && title && description && latitude && longitude && imageURL && phoneNo && address) {
       const item = {
         category: category,
