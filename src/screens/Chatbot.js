@@ -12,7 +12,8 @@ import {
 import { ScrollView } from 'react-native-gesture-handler';
 import uuid from 'react-native-uuid';
 
-import fetchAnswer from '../lib/qnaMaker'
+//import fetchAnswer from '../lib/qnaMaker'
+import fetchAnswer from '../lib/chatbotEndpoint'
 
 export default function Chatbot() {
   const [text, onChangeText] = useState("")
@@ -29,6 +30,21 @@ export default function Chatbot() {
       type: 'question'
     })
     let response = fetchAnswer(text)
+
+    response.then(data => {
+      //console.log(data.answer)
+      array.push({
+        id: uuid.v4(),
+        message: data.answer,
+        type: 'answer'
+      })
+      console.log(data)
+    })
+
+    setMessages(array)
+    onChangeText('')
+
+    /*
     response.then(data => {
       array.push({
         id: uuid.v4(),
@@ -41,6 +57,7 @@ export default function Chatbot() {
     setMessages(array)
     onChangeText('') //reset text
     console.log(messages)
+    */
   }
 
   const Item = ({ item }) => (
