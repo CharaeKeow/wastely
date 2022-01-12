@@ -9,8 +9,7 @@ import {
 import { Button } from 'react-native-paper'
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 import { ScrollView } from 'react-native-gesture-handler'
-import firestore from '@react-native-firebase/firestore'
-import auth from '@react-native-firebase/auth'
+import * as Linking from 'expo-linking'
 
 import styles from '../styles/MyListingDetailScreen.style'
 
@@ -67,8 +66,23 @@ export default function RequestDetailScreen({ route }) {
           />
         </MapView>
         <View>
-          <Button>WhatsApp</Button>
-          <Button>Call</Button>
+          <Text style={styles.helpText}>Lend a Hend ♥:</Text>
+          <View style={styles.btnHelpCtn}>
+            <Button
+              icon="whatsapp"
+              mode="contained"
+              style={styles.btnHelp}
+              onPress={() => Linking.openURL(`https://wasap.my/+6${phoneNo}`)}>
+              WhatsApp
+            </Button>
+            <Button
+              icon="phone"
+              mode="contained"
+              style={styles.btnHelp}
+              onPress={() => Linking.openURL(`tel:+6${obj.phoneNo}`)}>
+              Call
+            </Button>
+          </View>
         </View>
       </View>
     </ScrollView>

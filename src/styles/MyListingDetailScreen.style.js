@@ -26,4 +26,23 @@ export default StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
   },
+  helpText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginTop: 10,
+    fontSize: 16
+  },
+  btnHelpCtn: {
+    flex: 1,
+    height: 60,
+    width: 400,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 10,
+  },
+  btnHelp: {
+    marginTop: 20,
+    width: 150,
+    height: 40,
+  }
 })
