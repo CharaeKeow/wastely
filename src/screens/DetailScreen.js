@@ -12,6 +12,8 @@ import { ScrollView } from 'react-native-gesture-handler'
 import firestore from '@react-native-firebase/firestore'
 import auth from '@react-native-firebase/auth'
 
+import styles from '../styles/MyListingDetailScreen.style'
+
 export default function DetailScreen({ route }) {
   const { obj } = route.params
   const [requesterID, setRequesterID] = useState()
@@ -69,6 +71,8 @@ export default function DetailScreen({ route }) {
         <Text style={styles.txt}>Description: {description}</Text>
         <Text style={styles.txt}>Pickup Time: {pickUpTime}</Text>
         <Text style={styles.txt}>Approximate Location</Text>
+
+        {/*//TODO: Remove the MapView comment to enable MapView again
         <MapView
           provider={PROVIDER_GOOGLE}
           style={styles.map}
@@ -87,6 +91,8 @@ export default function DetailScreen({ route }) {
             fillColor="rgba(1, 111, 185, 0.3)"
           />
         </MapView>
+        */}
+
       </View>
       <Button
         mode="contained"
@@ -96,34 +102,25 @@ export default function DetailScreen({ route }) {
       >
         Request this
       </Button>
+      <View>
+        <Text style={styles.helpText}>Contact 📞: </Text>
+        <View style={styles.btnHelpCtn}>
+          <Button
+            icon="whatsapp"
+            mode="contained"
+            style={styles.btnHelp}
+            onPress={() => Linking.openURL(`https://wasap.my/+6${phoneNo}`)}>
+            WhatsApp
+          </Button>
+          <Button
+            icon="phone"
+            mode="contained"
+            style={styles.btnHelp}
+            onPress={() => Linking.openURL(`tel:+6${obj.phoneNo}`)}>
+            Call
+          </Button>
+        </View>
+      </View>
     </ScrollView>
   )
 }
-
-const styles = StyleSheet.create({
-  img: {
-    height: 300,
-    width: 400,
-  },
-  ctnDetails: {
-    padding: 5,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: '800',
-  },
-  map: {
-    width: Dimensions.get('window').width,
-    height: 250,
-    marginTop: 5,
-  },
-  txt: {
-    marginTop: 5,
-  },
-  btnRequest: {
-    width: 300,
-    alignSelf: 'center',
-    marginTop: 20,
-    marginBottom: 20,
-  },
-})

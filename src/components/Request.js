@@ -7,23 +7,19 @@ import {
 } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-export default function Item({ item, navigation }) {
-  useEffect(() => {
-    //console.log(data)
-  })
-
+export default function Request({ item, navigation }) {
   return (
     <TouchableOpacity
       style={styles.item}
-      onPress={() => navigation.navigate('DetailScreen', { obj: item })}
+      onPress={() => navigation.navigate('RequestDetailScreen', { obj: item })}
     >
       <View>
         <Image style={styles.img} source={{ uri: item.imageURL }} />
       </View>
       <View style={styles.ctnDetails}>
-        <Text style={item.category === 'Food' ? styles.categoryFood : item.category === 'Non-Food' ? styles.categoryNonFood : styles.categoryHelp}>{item.category}</Text>
+        <Text style={item.category === 'Emergency' ? styles.categoryEmergency : item.category === 'Volunteer' ? styles.categoryVolunteer : styles.categoryOther}>{item.category}</Text>
         <Text style={styles.title}>{item.title}</Text>
-        <Text>{item.donorName}</Text>
+        <Text>👤 {item.userName}</Text>
         <Text>📍 {item.distance.toFixed(2)} km</Text>
       </View>
     </TouchableOpacity>
@@ -41,28 +37,31 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
     flexDirection: 'row',
-    width: 300,
+    width: 350,
     alignSelf: 'center',
     backgroundColor: '#fff',
     borderRadius: 15,
   },
   title: {
-    fontSize: 20,
+    fontSize: 18,
+    maxWidth: 230,
     fontWeight: '800',
+
   },
   ctnDetails: {
     padding: 5,
+    flexWrap: 'wrap',
   },
-  categoryFood: {
+  categoryOther: {
     borderRadius: 5,
     textAlign: 'center',
     color: '#fff',
     fontWeight: 'bold',
     backgroundColor: '#003FFF',
     padding: 2,
-    width: 50,
+    width: 180,
   },
-  categoryNonFood: {
+  categoryVolunteer: {
     borderRadius: 5,
     textAlign: 'center',
     color: '#fff',
@@ -71,13 +70,13 @@ const styles = StyleSheet.create({
     padding: 2,
     width: 80,
   },
-  categoryHelp: {
+  categoryEmergency: {
     borderRadius: 5,
     textAlign: 'center',
     color: '#fff',
     fontWeight: 'bold',
     backgroundColor: '#FF000F',
     padding: 2,
-    width: 50,
+    width: 90,
   }
 })

@@ -1,38 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import {
+  Image,
   FlatList,
+  StyleSheet,
+  Text,
   View,
+  Dimensions,
 } from 'react-native'
 import { FAB } from 'react-native-paper'
 import firestore from '@react-native-firebase/firestore'
 import { ActivityIndicator, Chip, Colors } from 'react-native-paper'
 const haversine = require('haversine')
-
 import * as HookState from '@hookstate/core'
 
 import store from '../lib/store'
-import styles from '../styles/HomeScreen.style'
-import Item from '../components/Item'
+import Request from '../components/Request'
+import styles from '../styles/RequestScreen.style'
 
-export default function HomeScreen({ navigation }) {
-  const [selected, setSelected] = useState('all')
-  const [filter, setFilter] = useState();
-  const [donations, setDonations] = useState([])
-  const [loading, setLoading] = useState(true)
-
-  //for getting user location
-  //const [location, setLocation] = useState(null)
-  //const [errorMsg, setErrorMsg] = useState(null)
-
-  // Firestore 'Donations' document reference
-  const ref = firestore().collection('Donations')
-
+export default function RequestScreen({ navigation }) {
   const { location, errorMsg } = HookState.useState(store)
+  const [requests, setRequests] = useState(null)
+  const [loading, setLoading] = useState(null)
+  const [selected, setSelected] = useState('all')
 
-  //if error alert user that need their location
-  if (errorMsg.promised) {
-    alert(errorMsg)
-  }
+  const ref = firestore().collection('Requests')
 
   useEffect(() => {
     let isMounted = true
@@ -42,61 +33,52 @@ export default function HomeScreen({ navigation }) {
         const list = []
 
         querySnapshot.forEach(doc => {
-          //assign data from document
           const {
+            address,
             category,
             description,
-            donorName,
-            duration,
-            title,
             imageURL,
-            isClaimed,
-            isPickedUp,
+            isHelped,
             latitude,
             longitude,
-            pickUpTime,
-            quantity,
+            phoneNo,
             timeStamp,
+            title,
             uid,
+            userName,
           } = doc.data()
 
           let distance = calculateLocation(latitude, longitude)
 
-          //push data to temp array list
-          if (!isClaimed) {
+          if (!isHelped) {
             list.push({
               id: doc.id,
+              distance: distance,
+              address,
               category,
               description,
-              donorName,
-              duration,
-              title,
               imageURL,
-              isClaimed,
-              isPickedUp,
+              isHelped,
               latitude,
               longitude,
-              pickUpTime,
-              quantity,
+              phoneNo,
               timeStamp,
+              title,
               uid,
-              distance: distance,
+              userName,
             })
           }
 
-          setDonations(list)
-
-          if (loading) {
-            setLoading(false)
-          }
+          setRequests(list)
         })
       }, [])
     }
+
     return () => { isMounted = false }
   }, [])
 
   const renderItem = ({ item }) => {
-    return <Item item={item} navigation={navigation} />
+    return <Request item={item} navigation={navigation} />
   }
 
   const calculateLocation = (itemLat, itemLong) => {
@@ -114,12 +96,6 @@ export default function HomeScreen({ navigation }) {
     return haversine(start, end)
   }
 
-  if (loading) {
-    return (
-      <ActivityIndicator animating={true} color={Colors.red800} />
-    )
-  }
-
   return (
     <View>
       <View style={styles.chipsContainer}>
@@ -131,23 +107,30 @@ export default function HomeScreen({ navigation }) {
           onPress={() => setSelected('all')
           }>All</Chip>
         <Chip
-          selected={selected == 'food' ? true : false}
-          selectedColor={selected == 'food' ? '#016FB9' : '#000'}
+          selected={selected == 'emergency' ? true : false}
+          selectedColor={selected == 'emergency' ? '#016FB9' : '#000'}
+          style={styles.chip}
+          icon="alert"
+          onPress={() => setSelected('emergency')
+          }>Emergency</Chip>
+        <Chip
+          selected={selected == 'volunteer' ? true : false}
+          selectedColor={selected == 'volunteer' ? '#016FB9' : '#000'}
+          style={styles.chip}
+          icon="handshake"
+          onPress={() => setSelected('volunteer')
+          }>Volunteer</Chip>
+        <Chip
+          selected={selected == 'other' ? true : false}
+          selectedColor={selected == 'other' ? '#016FB9' : '#000'}
           style={styles.chip}
           icon="food"
-          onPress={() => setSelected('food')
-          }>Food</Chip>
-        <Chip
-          selected={selected == 'non-food' ? true : false}
-          selectedColor={selected == 'non-food' ? '#016FB9' : '#000'}
-          style={styles.chip}
-          icon="heart"
-          onPress={() => setSelected('non-food')
-          }>Non-food</Chip>
+          onPress={() => setSelected('other')
+          }>Other</Chip>
       </View>
       <FlatList
         style={styles.flatListContainer}
-        data={selected === 'all' ? donations : selected == 'food' ? donations.filter(donation => (donation.category == 'Food')) : donations.filter(donation => donation.category == 'Non-Food')}
+        data={selected === 'all' ? requests : selected == 'emergency' ? requests.filter(request => request.category == 'Emergency') : selected == 'volunteer' ? requests.filter(request => request.category == 'Volunteer') : requests.filter(request => request.category != 'Volunteer' && request.category != 'Emergency')}
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />
@@ -155,8 +138,8 @@ export default function HomeScreen({ navigation }) {
         style={styles.fab}
         big
         icon="plus"
-        onPress={() => navigation.navigate('AddItem')}
+        onPress={() => navigation.navigate('AddRequest')}
       />
     </View>
-  );
+  )
 }

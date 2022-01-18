@@ -10,7 +10,8 @@ export default StyleSheet.create({
   },
   fab: {
     position: 'absolute',
-    //marginBottom: 40,
+    resizeMode: 'contain',
+    //marginBottom: 100,
     //marginRight: 10,
     right: 10,
     bottom: 50,
@@ -20,14 +21,13 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-around',
     height: 50,
     marginTop: 30,
   },
   chip: {
     height: 30,
     backgroundColor: '#fff',
-    marginLeft: 5,
     color: '#000'
   },
   chipSelected: {

@@ -1,20 +1,15 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from "react-native"
 
 export default StyleSheet.create({
   container: {
     flex: 1,
+    height: 150,
+    width: 400,
   },
-  img: {
-    width: 150,
-    height: 150
-  },
-  fab: {
-    position: 'absolute',
-    //marginBottom: 40,
-    //marginRight: 10,
-    right: 10,
-    bottom: 50,
-    backgroundColor: '#016FB9'
+  map: {
+    marginTop: 20,
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height - 130,
   },
   chipsContainer: {
     flex: 1,
@@ -22,7 +17,8 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     height: 50,
-    marginTop: 30,
+    marginTop: 20,
+    marginBottom: 0,
   },
   chip: {
     height: 30,
@@ -35,8 +31,4 @@ export default StyleSheet.create({
     backgroundColor: '#016FB9',
     color: '#fff',
   },
-  flatListContainer: {
-    marginTop: 20,
-    minHeight: Dimensions.get('window').height - 110,
-  }
 })
